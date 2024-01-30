@@ -1,38 +1,29 @@
-//Criando o index.js
+//ARQUIVO ********** index.js **********
 //CRIAÇÃO DE UMA APLICAÇÃO EXPRESS
 const express = require('express');//IMPORTANDO EXPRESS
-
 const path = require('path');//IMPORTANDO PATH
-//O PATH RETORNA O CAMINHO DE FORMA DINAMICA
+//O PATH RETORNA O CAMINHO DE FORMA DINÂMICA
+
+//*****Configuração do Banco de Dados MySQL*****
+const db = require('./db');//IMPORTANDO O NOSSO MÓDULO DE CONEXÃO COM O BANCO.
 
 const app = express();
 //O APP IRÁ RECEBER O EXPRESS E TODAS SUAS DEPENDÊNCIAS
 
-const router = express.Router()
-// ISSO PERMITE QUE A GENTE CRIE DIFERENTES URLs E ENDPOINTs PARA QUE O FRONTEND POSSA FAZER CHAMADAS
+//*****Configuração das rotas*****
+const routes = require('./routes');//CHAMANDO O MÓDULO DAS ROTAS
 
-router.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname + '/pages/home.html'))
-})
-//AQUI DEFINIMOS NOSSA ROTA PARA O ARQUIVO HTML USANDO O PATH PARA SEMPRE RETORNAR DINAMICAMENTE O VEM ATES DA "/pages/home.html"
 
-app.use(router);
+app.use(express.json());//AQUI TRANSFORMAMOS OS DADOS QUE CHEGAM COMO BINARIO EM JSON
+
+app.use('/', routes);
 //APÓS DECLARAR NOSSAS ROTAS, AQUI FALAMOS PARA NOSSO APP USAR ELAS COMO REFERÊNCIA 
 
-
-app.listen(3333, ()=>{
+app.listen(3333, () => {
     console.log('SERVIDOR RODANDO')
 })
 //AQUI DEFINIMOS QUEM IRÁ ESCUTAR NOSSO CHAMADO E NOS RESPONDER
 
 
-app.get('/hello', (request, reply) => {
-    console.log('GET FUNCIONANDO');
-    reply.send({ message: 'Hello World!!!' });
-})
-// TUDO QUE SE ENCONTRA DEPOIS DA BARRA "/"  SERÃO NOSSAS ROTAS. 
-// dentro do get ja definimos uma função anonima CALLBACK, que recebe uma requisição com o REQUEST e que retorna uma resposta com o REPLY
-app.get('/usuario', (request, reply) => {
-    console.log('GET USUÁRIO FUNCIONANDO');
-    reply.send({usuario: 'SANDRO'});
-})
+
+
