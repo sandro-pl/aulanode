@@ -71,7 +71,7 @@ exports.adicionarPedido = (req, res) => {
 // Atualizar um pedido
 exports.atualizarPedido = (req, res) => {
   const { id } = req.params;
-  const { forma_pagto, qtde_itens, valor_total, cpf } = req.body;
+  const { forma_pagto, qtde_itens, valor_total, cpf, id_entregador } = req.body;
   const pedidoAtualizado = { forma_pagto, qtde_itens, valor_total, cpf, id_entregador };
 
   db.query('UPDATE pedido SET ? WHERE id = ?', [pedidoAtualizado, id], (err, result) => {

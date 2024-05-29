@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Radio Button Invisível</title>
+    <style>
+        /* Inicialmente esconde o radio button */
+        .radio-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Checkbox que controla a visibilidade do radio button -->
+    <label>
+        <input type="checkbox" id="toggle-checkbox" onclick="toggleRadioVisibility()"> Mostrar Opções
+    </label>
+
+    <!-- Radio buttons inicialmente escondidos -->
+    <div id="radio-options" class="radio-hidden">
+        <label>
+            <input type="radio" name="option" value="1"> Opção 1
+        </label>
+        <label>
+            <input type="radio" name="option" value="2"> Opção 2
+        </label>
+    </div>
+
+    <script>
+        // Função que altera a visibilidade do grupo de radio buttons
+        function toggleRadioVisibility() {
+            var checkbox = document.getElementById('toggle-checkbox');
+            var radioOptions = document.getElementById('radio-options');
+
+            // Verifica se o checkbox está marcado e exibe/esconde os radio buttons
+            if (checkbox.checked) {
+                radioOptions.style.display = 'block';
+            } else {
+                radioOptions.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

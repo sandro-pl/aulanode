@@ -3,7 +3,6 @@ const db = require('./db');
 const Joi = require('joi');
 
 const produtoSchema = Joi.object({
-  //id: Joi.string().required(),
   nome_produto: Joi.string().required(),
   descricao: Joi.string().required(),
   valor: Joi.string().required(),
@@ -45,7 +44,6 @@ exports.buscarProdutoId = (req, res) => {
 // Buscar produtos por nome
 exports.buscarProdutoNome = (req, res) => {
     const { nome_produto } = req.params; // req.params acessa os parametros
-
     //LIKE com o operador % usado para buscar produtos cujo nome começa com o prefixo especificado na URL.
     db.query('SELECT * FROM produto WHERE nome_produto LIKE ?', [`${nome_produto}%`], (err, result) => {
       if (err) {
@@ -89,7 +87,7 @@ exports.atualizarProduto = (req, res) => {
   const { id } = req.params;
   const { nome_produto, descricao, valor, imagem } = req.body;
 
-  const { error } = produtoSchema.validate({ id, nome_produto, descricao, valor, imagem });
+  const { error } = produtoSchema.validate({nome_produto, descricao, valor, imagem });
 
   if (error) {
     res.status(400).json({ error: 'Dados de produto inválidos' });
